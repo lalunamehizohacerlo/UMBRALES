@@ -1,33 +1,38 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UMBRALES</title>
+    <title>Oráculo Umbrales</title>
+    <!-- Tipografía mística y elegante de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #1a1a2e;
+            /* Fondo violeta oscuro místico */
+            background-color: #0d0814;
             color: #ffffff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Cinzel', serif;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
             text-align: center;
             padding: 20px;
+            box-sizing: border-box;
         }
         h1 {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             margin-bottom: 20px;
-            color: #e94560;
-            letter-spacing: 2px;
+            /* Título en color blanco puro */
+            color: #ffffff;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
         }
         .card-container {
-            width: 220px;
-            height: 350px;
+            width: 240px;
+            height: 380px;
             perspective: 1000px;
             cursor: pointer;
             margin-bottom: 25px;
@@ -48,19 +53,21 @@
             height: 100%;
             backface-visibility: hidden;
             border-radius: 12px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
         .card-back {
-            background: linear-gradient(135deg, #0f3460, #16213e);
-            border: 2px solid #e94560;
-            font-size: 1.2rem;
-            color: #e94560;
+            background: linear-gradient(135deg, #1d112b, #2b1740);
+            border: 2px solid #a879e6;
+            font-size: 1.1rem;
+            color: #d1b3ff;
+            letter-spacing: 1px;
         }
         .card-front {
-            background-color: #fff;
+            background-color: #000;
             transform: rotateY(180deg);
         }
         .card-front img {
@@ -70,15 +77,18 @@
             border-radius: 12px;
         }
         button {
-            background-color: #e94560;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            font-size: 1rem;
+            /* Botón en violeta místico con texto blanco */
+            background-color: #6a349c;
+            color: #ffffff;
+            border: 1px solid #a879e6;
+            padding: 12px 28px;
+            font-size: 0.9rem;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
             border-radius: 25px;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(233, 69, 96, 0.4);
-            transition: background 0.2s;
+            box-shadow: 0 4px 12px rgba(106, 52, 156, 0.4);
+            transition: all 0.2s ease;
         }
         button:active {
             transform: scale(0.95);
@@ -87,63 +97,67 @@
 </head>
 <body>
 
-    <h1>CONSULTA TU ORÁCULO</h1>
+    <h1>UMBRALES</h1>
 
     <div class="card-container" onclick="sacarCarta()">
-        <div class="card" id="cartaMazo">
-            <div class="card-face card-back">Toca para sacar</div>
+        <!-- La carta arranca dada vuelta mostrando la carátula -->
+        <div class="card flipped" id="cartaMazo">
+            <div class="card-face card-back">Toca para consultar</div>
             <div class="card-face card-front">
-                <img id="imagenCarta" src="" alt="Carta del oráculo">
+                <!-- Acá se carga la carátula al inicio -->
+                <img id="imagenCarta" src="portada.jpg" alt="Carátula de bienvenida">
             </div>
         </div>
     </div>
 
-    <button onclick="sacarCarta()">Sacar otra carta</button>
+    <button onclick="sacarCarta()">Sacar una carta</button>
 
     <script>
-        // Reemplaza esto con los nombres de tus imágenes reales
+        // 1. Poné acá el nombre EXACTO de tu imagen de portada (ej: "portada.jpg")
+        const imagenPortada = "umb.0.png";
+
+        // 2. Poné acá SOLO los nombres de tus cartas del oráculo
         const cartas = [
-            "umb1.png",
-            "umb2.png",
-            "umb3.png",
-            "umb4.png",
-            "umb5.png",
-            "umb6.png",
-            "umb7.png",
-            "umb8.png",
-            "umb9.png",
-            "umb10.png",
-            "umb11.png",
-            "umb12.png",
-            "umb13.png",
-            "umb14.png",
-            "umb15.png",
-            "umb16.png",
-            "umb17.png",
-            "umb18.png",
-            "umb19.png",
-            "umb20.png",
-            "umb21.png",
-            "umb22.png",
-            
-            // Agregá todas las que quieras acá separadas por comas
+             "umb.1.png",
+            "umb.2.png",
+            "umb.3.png",
+            "umb.4.png",
+            "umb.5.png",
+            "umb.6.png",
+            "umb.7.png",
+            "umb.8.png",
+            "umb.9.png",
+            "umb.10.png",
+            "umb.11.png",
+            "umb.12.png",
+            "umb.13.png",
+            "umb.14.png",
+            "umb.15.png",
+            "umb.16.png",
+            "umb.17.png",
+            "umb.18.png",
+            "umb.19.png",
+            "umb.20.png",
+            "umb.21.png",
+            "umb.22.png",
+            // Agregá todas las cartas que quieras separadas por coma
         ];
 
         function sacarCarta() {
             const cardElement = document.getElementById('cartaMazo');
             const imgElement = document.getElementById('imagenCarta');
 
-            // Efecto sutil de giro
+            // Volvemos a ocultar la cara frontal (se gira hacia el dorso)
             cardElement.classList.remove('flipped');
             
             setTimeout(() => {
-                // Elegir una carta al azar
+                // Elegimos una carta al azar del mazo (excluyendo la portada)
                 const randomIndex = Math.floor(Math.random() * cartas.length);
                 imgElement.src = cartas[randomIndex];
                 
-                // Mostrar la carta
+                // La volvemos a dar vuelta mostrando la nueva carta elegida
                 cardElement.classList.add('flipped');
-            }, 200);
+            }, 300);
         }
     </script>
 </body>
