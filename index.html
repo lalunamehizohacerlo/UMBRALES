@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            /* Fondo violeta oscuro místico */
             background-color: #0d0814;
             color: #ffffff;
             font-family: 'Cinzel', serif;
@@ -25,14 +24,13 @@
         h1 {
             font-size: 1.8rem;
             margin-bottom: 20px;
-            /* Título en color blanco puro */
             color: #ffffff;
             letter-spacing: 3px;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
         }
         .card-container {
-            width: 240px;
-            height: 380px;
+            width: 280px;
+            height: 440px;
             perspective: 1000px;
             cursor: pointer;
             margin-bottom: 25px;
@@ -58,26 +56,28 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            background-color: #1a0f2b;
+            border: 1px solid #a879e6;
         }
         .card-back {
             background: linear-gradient(135deg, #1d112b, #2b1740);
-            border: 2px solid #a879e6;
             font-size: 1.1rem;
             color: #d1b3ff;
             letter-spacing: 1px;
         }
         .card-front {
-            background-color: #000;
+            background-color: #0d0814;
             transform: rotateY(180deg);
         }
+        /* Ajuste para que las fotos queden perfectamente centradas y adaptadas */
         .card-front img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain; /* Centra y ajusta la imagen sin recortar ni estirar */
             border-radius: 12px;
+            display: block;
         }
         button {
-            /* Botón en violeta místico con texto blanco */
             background-color: #6a349c;
             color: #ffffff;
             border: 1px solid #a879e6;
@@ -100,12 +100,11 @@
     <h1>UMBRALES</h1>
 
     <div class="card-container" onclick="sacarCarta()">
-        <!-- La carta arranca dada vuelta mostrando la carátula -->
+        <!-- Arranca girada para mostrar la cara frontal con la portada -->
         <div class="card flipped" id="cartaMazo">
             <div class="card-face card-back">Toca para consultar</div>
             <div class="card-face card-front">
-                <!-- Acá se carga la carátula al inicio -->
-                <img id="imagenCarta" src="portada.jpg" alt="Carátula de bienvenida">
+                <img id="imagenCarta" src="umb.0.png" alt="Carátula de bienvenida">
             </div>
         </div>
     </div>
@@ -113,12 +112,9 @@
     <button onclick="sacarCarta()">Sacar una carta</button>
 
     <script>
-        // 1. Poné acá el nombre EXACTO de tu imagen de portada (ej: "portada.jpg")
-        const imagenPortada = "umb.0.png";
-
-        // 2. Poné acá SOLO los nombres de tus cartas del oráculo
+        // Lista con las cartas del mazo (sin la portada)
         const cartas = [
-             "umb.1.png",
+            "umb.1.png",
             "umb.2.png",
             "umb.3.png",
             "umb.4.png",
@@ -140,22 +136,18 @@
             "umb.20.png",
             "umb.21.png",
             "umb.22.png",
-            // Agregá todas las cartas que quieras separadas por coma
+            // Agregá acá todas las demás fotos que tengas
         ];
 
         function sacarCarta() {
             const cardElement = document.getElementById('cartaMazo');
             const imgElement = document.getElementById('imagenCarta');
 
-            // Volvemos a ocultar la cara frontal (se gira hacia el dorso)
             cardElement.classList.remove('flipped');
             
             setTimeout(() => {
-                // Elegimos una carta al azar del mazo (excluyendo la portada)
                 const randomIndex = Math.floor(Math.random() * cartas.length);
                 imgElement.src = cartas[randomIndex];
-                
-                // La volvemos a dar vuelta mostrando la nueva carta elegida
                 cardElement.classList.add('flipped');
             }, 300);
         }
