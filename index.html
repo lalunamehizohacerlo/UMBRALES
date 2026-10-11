@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMBRALES</title>
+    <style>
+        body {
+            background-color: #1a1a2e;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #e94560;
+            letter-spacing: 2px;
+        }
+        .card-container {
+            width: 220px;
+            height: 350px;
+            perspective: 1000px;
+            cursor: pointer;
+            margin-bottom: 25px;
+        }
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease;
+        }
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card-back {
+            background: linear-gradient(135deg, #0f3460, #16213e);
+            border: 2px solid #e94560;
+            font-size: 1.2rem;
+            color: #e94560;
+        }
+        .card-front {
+            background-color: #fff;
+            transform: rotateY(180deg);
+        }
+        .card-front img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+        button {
+            background-color: #e94560;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(233, 69, 96, 0.4);
+            transition: background 0.2s;
+        }
+        button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>CONSULTA TU ORÁCULO</h1>
+
+    <div class="card-container" onclick="sacarCarta()">
+        <div class="card" id="cartaMazo">
+            <div class="card-face card-back">Toca para sacar</div>
+            <div class="card-face card-front">
+                <img id="imagenCarta" src="" alt="Carta del oráculo">
+            </div>
+        </div>
+    </div>
+
+    <button onclick="sacarCarta()">Sacar otra carta</button>
+
+    <script>
+        // Reemplaza esto con los nombres de tus imágenes reales
+        const cartas = [
+            "umb1.png",
+            "umb2.png",
+            "umb3.png",
+            "umb4.png",
+            "umb5.png",
+            "umb6.png",
+            "umb7.png",
+            "umb8.png",
+            "umb9.png",
+            "umb10.png",
+            "umb11.png",
+            "umb12.png",
+            "umb13.png",
+            "umb14.png",
+            "umb15.png",
+            "umb16.png",
+            "umb17.png",
+            "umb18.png",
+            "umb19.png",
+            "umb20.png",
+            "umb21.png",
+            "umb22.png",
+            
+            // Agregá todas las que quieras acá separadas por comas
+        ];
+
+        function sacarCarta() {
+            const cardElement = document.getElementById('cartaMazo');
+            const imgElement = document.getElementById('imagenCarta');
+
+            // Efecto sutil de giro
+            cardElement.classList.remove('flipped');
+            
+            setTimeout(() => {
+                // Elegir una carta al azar
+                const randomIndex = Math.floor(Math.random() * cartas.length);
+                imgElement.src = cartas[randomIndex];
+                
+                // Mostrar la carta
+                cardElement.classList.add('flipped');
+            }, 200);
+        }
+    </script>
+</body>
+</html>
