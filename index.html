@@ -7,8 +7,9 @@
     <!-- Tipografía mística y elegante de Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* Fondo con gradiente místico */
         body {
-            background-color: #0d0814;
+            background: radial-gradient(circle at center, #1b0f2e 0%, #0d0814 100%);
             color: #ffffff;
             font-family: 'Cinzel', serif;
             display: flex;
@@ -18,102 +19,196 @@
             min-height: 100vh;
             margin: 0;
             text-align: center;
-            padding: 20px;
+            padding: 10px;
             box-sizing: border-box;
+            overflow-x: hidden;
+            position: relative;
         }
+
+        /* Capa de destellos flotantes en el fondo */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #e3c5ff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 40px 70px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1.5px 1.5px at 90px 40px, #b8860b, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 160px 120px, #d1b3ff, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            opacity: 0.35;
+            animation: destellosFlotantes 20s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes destellosFlotantes {
+            from { background-position: 0 0; }
+            to { background-position: 0 -400px; }
+        }
+
+        /* Botón flotante para la música */
+        #btnMusica {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: rgba(106, 52, 156, 0.6);
+            color: #ffffff;
+            border: 1px solid #a879e6;
+            padding: 8px 16px;
+            font-size: 0.85rem;
+            font-family: 'Cinzel', serif;
+            border-radius: 20px;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        #btnMusica:hover {
+            background: rgba(130, 66, 194, 0.9);
+        }
+
         h1 {
             font-size: 1.8rem;
+            margin-top: 10px;
             margin-bottom: 20px;
             color: #ffffff;
-            letter-spacing: 3px;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            letter-spacing: 4px;
+            text-shadow: 0 0 15px rgba(209, 179, 255, 0.5);
+            z-index: 1;
         }
+
+        /* CARTA AGRANDADA CON RESPLANDOR / HALO QUE RESPIRA */
         .card-container {
-            width: 340px;
-            height: 530px;
+            width: 88vw;
+            max-width: 360px;
+            height: 138vw;
+            max-height: 560px;
             perspective: 1000px;
             cursor: pointer;
             margin-bottom: 25px;
+            z-index: 1;
         }
+
         .card {
             width: 100%;
             height: 100%;
             position: relative;
             transform-style: preserve-3d;
-            transition: transform 0.6s ease;
+            transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
+            border-radius: 16px;
+            animation: haloMistico 3.5s ease-in-out infinite alternate;
         }
+
+        @keyframes haloMistico {
+            0% {
+                box-shadow: 0 0 15px rgba(168, 121, 230, 0.3), 0 0 30px rgba(106, 52, 156, 0.2);
+            }
+            100% {
+                box-shadow: 0 0 25px rgba(209, 179, 255, 0.7), 0 0 50px rgba(168, 121, 230, 0.5);
+            }
+        }
+
         .card.flipped {
             transform: rotateY(180deg);
         }
+
         .card-face {
             position: absolute;
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+            -webkit-backface-visibility: hidden;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            background-color: #1a0f2b;
-            border: 1px solid #a879e6;
+            box-sizing: border-box;
         }
+
+        /* Dorso místico limpio */
         .card-back {
-            background: linear-gradient(135deg, #1d112b, #2b1740);
-            font-size: 1.1rem;
-            color: #d1b3ff;
-            letter-spacing: 1px;
+            background: radial-gradient(circle, #2b1740 0%, #150b21 100%);
+            border: 2px solid #a879e6;
         }
+
+        .card-back::after {
+            content: "✦";
+            font-size: 2.5rem;
+            color: rgba(209, 179, 255, 0.4);
+            text-shadow: 0 0 10px rgba(209, 179, 255, 0.6);
+        }
+
         .card-front {
-            background-color: #0d0814;
+            background-color: #000;
             transform: rotateY(180deg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        /* Ajuste para que las fotos queden perfectamente centradas y adaptadas */
+
         .card-front img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Centra y ajusta la imagen sin recortar ni estirar */
-            background-color: #000;
+            object-fit: contain;
+            background-color: #000000;
             border-radius: 16px;
-            display: block;
         }
-        button {
+
+        .btn-sacar {
             background-color: #6a349c;
             color: #ffffff;
             border: 1px solid #a879e6;
-            padding: 12px 28px;
-            font-size: 0.9rem;
+            padding: 14px 32px;
+            font-size: 1rem;
             font-family: 'Cinzel', serif;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             border-radius: 25px;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(106, 52, 156, 0.4);
-            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(106, 52, 156, 0.5);
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+            z-index: 1;
         }
-        button:active {
+
+        .btn-sacar:hover {
+            background-color: #8242c2;
+            box-shadow: 0 0 20px rgba(168, 121, 230, 0.8);
+        }
+
+        .btn-sacar:active {
             transform: scale(0.95);
         }
     </style>
 </head>
 <body>
 
+    <!-- Elemento de audio oculto -->
+    <audio id="musicaFondo" loop>
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Botón flotante para activar o pausar la música -->
+    <button id="btnMusica" onclick="toggleMusica()">🎵 Música: OFF</button>
+
     <h1>UMBRALES</h1>
 
     <div class="card-container" onclick="sacarCarta()">
-        <!-- Arranca girada para mostrar la cara frontal con la portada -->
         <div class="card flipped" id="cartaMazo">
-            <div class="card-face card-back">Toca para consultar</div>
+            <div class="card-face card-back"></div>
             <div class="card-face card-front">
                 <img id="imagenCarta" src="umb.0.png" alt="Carátula de bienvenida">
             </div>
         </div>
     </div>
 
-    <button onclick="sacarCarta()">Sacar una carta</button>
+    <button class="btn-sacar" onclick="sacarCarta()">Sacar una carta</button>
 
     <script>
-        // Lista con las cartas del mazo (sin la portada)
+        const imagenPortada = "umb.0.png";
+
         const cartas = [
             "umb.1.png",
             "umb.2.png",
@@ -137,7 +232,6 @@
             "umb.20.png",
             "umb.21.png",
             "umb.22.png",
-            // Agregá acá todas las demás fotos que tengas
         ];
 
         function sacarCarta() {
@@ -150,7 +244,22 @@
                 const randomIndex = Math.floor(Math.random() * cartas.length);
                 imgElement.src = cartas[randomIndex];
                 cardElement.classList.add('flipped');
-            }, 300);
+            }, 350);
+        }
+
+        function toggleMusica() {
+            const audio = document.getElementById('musicaFondo');
+            const btn = document.getElementById('btnMusica');
+
+            if (audio.paused) {
+                audio.play();
+                btn.innerHTML = "🎵 Música: ON";
+                btn.style.background = "rgba(130, 66, 194, 0.9)";
+            } else {
+                audio.pause();
+                btn.innerHTML = "🎵 Música: OFF";
+                btn.style.background = "rgba(106, 52, 156, 0.6)";
+            }
         }
     </script>
 </body>
